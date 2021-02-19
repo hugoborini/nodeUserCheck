@@ -20,7 +20,7 @@ const pool = mysql.createPool({
 
 let user = {};
 
-user.all = ()=>{
+user.all = () => {
     return new Promise((resolve, reject) =>{
         pool.query('SELECT * FROM user', (err, results) => {
             if (err){
@@ -31,7 +31,7 @@ user.all = ()=>{
     });
 };
 
-user.create = (name, email, age)=>{
+user.create = (name, email, age) => {
     return new Promise((resolve, reject) =>{
         pool.query('INSERT INTO user (name, email, age) VALUES (?, ?, ?)', [name, email, age] , (err, results) => {
             if (err){
@@ -43,7 +43,7 @@ user.create = (name, email, age)=>{
 };
 
 
-user.delete = (id_user)=>{
+user.delete = (id_user) => {
     return new Promise((resolve, reject) =>{
         pool.query('DELETE FROM user WHERE user.id_user = ?', [id_user], (err, results) => {
             if (err){
@@ -53,5 +53,28 @@ user.delete = (id_user)=>{
         });
     });
 };
+
+user.getUserById = (id_user) => {
+    return new Promise((resolve, reject) =>{
+        pool.query('SELECT * FROM user WHERE user.id_user = ?', [id_user], (err, results) => {
+            if (err){
+                return reject(err);
+            }
+            return resolve (results);
+        });
+    });
+};
+
+user.update = (name, email, age, id_user) => {
+    return new Promise((resolve, reject) =>{
+        pool.query('UPDATE user SET name = ?, email = ?, age = ? WHERE id_user = ?', [name, email, age, id_user] , (err, results) => {
+            if (err){
+                return reject(err);
+            }
+            return resolve (results);
+        });
+    });
+};
+
 
 module.exports = user;

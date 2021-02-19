@@ -19,6 +19,7 @@
             <th>Email</th>
             <th>Age</th>
             <th></th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -29,6 +30,7 @@
             <td><a target="_blank" href="mailto:<%=result.email%>"><%= result.email %></a></td>
             <td><%= result.age %></td>
             <td data-idUser="<%= result.id_user %>" class="delete91380"><i class="far fa-trash-alt"></i></td>
+            <td data-idUser="<%= result.id_user %>" class="edit_icon"><a href="/edit/<%= result.id_user %>"><i class="far fa-edit"></i></a></td>
           </tr>
         <% }); %>
         </tbody>
@@ -39,8 +41,17 @@
 <style>
   .delete91380{
     cursor: pointer;
-     transition: color ease-in 0.2s;
+    transition: color ease-in 0.2s;
   }
+
+  .edit_icon {
+    cursor: pointer;
+  }
+  .edit_icon i {
+    text-decoration: none;
+    color: black;
+  }
+
   .delete91380:hover{
     color: red;
   }
@@ -52,8 +63,8 @@
 <script>
 
   const deleteIcon = document.querySelectorAll(".delete91380")
-  console.log(deleteIcon)
-
+  const edit_icon = document.querySelectorAll(".edit_icon")
+  console.log(edit_icon);
   deleteIcon.forEach(Icon =>{
     Icon.addEventListener("click", () =>{
       console.log(Icon.getAttribute("data-iduser"))
@@ -61,4 +72,27 @@
       fetch(`/delete/${Icon.getAttribute("data-iduser")}`).then(res => console.log(res.json) ).then(Icon.parentNode.classList.add("none"))
     })
   })
+
+
+
+
+
+
+  // edit_icon.forEach((edit_icon, index) => {
+  //   let click = 0;
+  //   edit_icon.addEventListener("click", () => {
+  //     click++
+  //     edit_icon.parentNode.children[1].outerHTML = `<td><input type="email" value='${edit_icon.parentNode.children[1].outerHTML}'></td>`
+  //     edit_icon.parentNode.children[2].outerHTML = `<td><input type="email" value='${edit_icon.parentNode.children[2].children[0].outerHTML}'></td>`
+  //     edit_icon.parentNode.children[3].outerHTML = `<td><input type="email" value='${edit_icon.parentNode.children[3].innerHTML}'></td>`
+  //     edit_icon.innerHTML = '<i class="fas fa-check"></i>'
+
+  //     if(click > 1) {
+  //       console.log('okgoogle');
+  //       edit_icon.parentNode.children[1].outerHTML = `<td>${edit_icon.parentNode.children[1].innerHTML}'</td>`
+  //       edit_icon.parentNode.children[2].outerHTML = `<td>${edit_icon.parentNode.children[2].innerHTML}'</td>`
+  //       edit_icon.parentNode.children[3].outerHTML = `<td>${edit_icon.parentNode.children[3].innerHTML}'</td>`
+  //     }
+  //   })
+  // })
 </script>

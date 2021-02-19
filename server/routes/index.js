@@ -45,4 +45,25 @@ router.get('/delete/:id_user', async(req, res, next) =>{
     }
 })
 
+router.get('/edit/:id_user', async(req, res, next) =>{
+    try{
+       let results = await db.getUserById(req.params.id_user)
+       res.render("edit.ejs",{results : results});
+       console.log(results);
+    } catch(e){
+        console.log(e);
+        res.sendStatus(500);
+    }
+})
+
+router.post('/update/:id_user', async(req, res, next) =>{
+    try{
+        db.update(req.body.name, req.body.email, req.body.age, req.params.id_user);
+        res.redirect("/")
+    } catch(e){
+        console.log(e);
+        res.sendStatus(500);
+    }
+})
+
 module.exports = router;
