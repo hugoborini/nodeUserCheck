@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
 </head>
 <body>
     <%- include('layout/nav.ejs') %>
@@ -16,6 +18,7 @@
             <th>Name</th>
             <th>Email</th>
             <th>Age</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -25,9 +28,37 @@
             <td><%= result.name %></td>
             <td><a target="_blank" href="mailto:<%=result.email%>"><%= result.email %></a></td>
             <td><%= result.age %></td>
+            <td data-idUser="<%= result.id_user %>" class="delete91380"><i class="far fa-trash-alt"></i></td>
           </tr>
         <% }); %>
         </tbody>
       </table>
 </body>
 </html>
+
+<style>
+  .delete91380{
+    cursor: pointer;
+     transition: color ease-in 0.2s;
+  }
+  .delete91380:hover{
+    color: red;
+  }
+  .none{
+    display: none;
+  }
+</style>
+
+<script>
+
+  const deleteIcon = document.querySelectorAll(".delete91380")
+  console.log(deleteIcon)
+
+  deleteIcon.forEach(Icon =>{
+    Icon.addEventListener("click", () =>{
+      console.log(Icon.getAttribute("data-iduser"))
+
+      fetch(`/delete/${Icon.getAttribute("data-iduser")}`).then(res => console.log(res.json) ).then(Icon.parentNode.classList.add("none"))
+    })
+  })
+</script>

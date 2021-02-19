@@ -1,7 +1,5 @@
 const express =  require("express");
 const db = require("../db");
-var multer = require('multer');
-
 const router = express.Router();
 
 
@@ -28,9 +26,19 @@ router.get('/login', async(req, res, next) =>{
 
 router.post('/create', async(req, res, next) =>{
     try{
-        // let results = await db.create(req.body.name, req.body.email, req.body.age);
-        console.log(req.body)
-        res.json(['oui'])
+        db.create(req.body.name, req.body.email, req.body.age);
+        res.redirect("/")
+    } catch(e){
+        console.log(e);
+        res.sendStatus(500);
+    }
+})
+
+
+router.get('/delete/:id_user', async(req, res, next) =>{
+    try{
+        db.delete(req.params.id_user)
+        res.json({"sucess": true})
     } catch(e){
         console.log(e);
         res.sendStatus(500);

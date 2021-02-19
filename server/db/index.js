@@ -42,4 +42,16 @@ user.create = (name, email, age)=>{
     });
 };
 
+
+user.delete = (id_user)=>{
+    return new Promise((resolve, reject) =>{
+        pool.query('DELETE FROM user WHERE user.id_user = ?', [id_user], (err, results) => {
+            if (err){
+                return reject(err);
+            }
+            return resolve (results);
+        });
+    });
+};
+
 module.exports = user;
