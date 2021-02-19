@@ -1,0 +1,17 @@
+const express = require('express');
+const APIroutes = require("./routes");
+const cors = require('cors');
+const app = express();
+app.set("view engine", "ejs");
+app.set("pages", "pages")
+//production//var PORT = process.env.PORT || '5000'
+//developement
+app.use(express.json());
+app.use(cors());
+app.use("/", APIroutes)
+
+
+
+app.listen(process.env.PORT || '3000', () =>{
+    console.log(`server is running at http://localhost:${process.env.PORT || 3000}`);    
+})
