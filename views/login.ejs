@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log toi fdp</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
+</head>
+<body>
+<form method="POST" action="/create" id="create_form">
+</form>
+<div class="form_container container is-centered">
+    <h2 class="title is-2 is-centered">Creer toi fdp</h2>
+    <div class="field">
+        <p class="control has-icons-left">
+            <input form="create_form" class="input" type="text" name="name" placeholder="Nom">
+            <span class="icon is-small is-left">
+            <i class="fas fa-user"></i>
+            </span>
+        </p>
+    </div>
+    <div class="field">
+        <p class="control has-icons-left has-icons-right">
+            <input form="create_form" class="input" type="email" name="email" placeholder="Email">
+            <span class="icon is-small is-left">
+            <i class="fas fa-envelope"></i>
+            </span>
+        </p>
+    </div>
+    <div class="field">
+        <p class="control has-icons-left">
+            <input form="create_form" class="input" type="number" name="age" placeholder="Age">
+            <span class="icon is-small is-left">
+            <i class="fas fa-sort-numeric-up"></i>
+            </span>
+        </p>
+    </div>
+    <div class="field">
+        <p class="control">
+            <button form="create_form" class="button is-success">
+            Create user
+            </button>
+        </p>
+    </div>
+</div>
+</body>
+</html>
+
+<style>
+.form_container {
+    width: 30vw;
+    padding-top: 20%;
+}
+
+</style>

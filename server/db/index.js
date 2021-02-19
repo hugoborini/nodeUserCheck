@@ -1,7 +1,6 @@
 const mysql = require('mysql');
 
 
-
 const pool = mysql.createPool({
     connectionLimit: 10,
 
@@ -19,9 +18,9 @@ const pool = mysql.createPool({
 });
 
 
-let coursedb = {};
+let user = {};
 
-coursedb.all = ()=>{
+user.all = ()=>{
     return new Promise((resolve, reject) =>{
         pool.query('SELECT * FROM user', (err, results) => {
             if (err){
@@ -32,4 +31,15 @@ coursedb.all = ()=>{
     });
 };
 
-module.exports = coursedb;
+user.create = (name, email, age)=>{
+    return new Promise((resolve, reject) =>{
+        pool.query('INSERT INTO user (name, email, age) VALUES (?, ?, ?)', [name, email, age] , (err, results) => {
+            if (err){
+                return reject(err);
+            }
+            return resolve (results);
+        });
+    });
+};
+
+module.exports = user;
